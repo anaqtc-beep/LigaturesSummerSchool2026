@@ -1,0 +1,132 @@
+@font-face {
+    font-family: lineal;
+    src: url(LinealVF.ttf);
+}
+*{
+    box-sizing: border-box;
+}
+html{
+    font-family: lineal;
+}
+
+#threeCanvas{
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+#scrollTeste{
+    position: relative;
+    display: block;
+    margin-top: 130vh;
+    width: 90vw;
+    margin-bottom: 100vh;
+    margin-left:5vw;
+    margin-right: 5vw;
+}
+
+/* BOTAO */
+#menu{
+ display: grid;
+ position: fixed;
+ width: 100vw;
+ justify-items: right;
+right: 2vw;
+top:2vw;
+z-index: 3;
+}
+
+button{
+    display: block;
+    font-size: 1.7rem;
+    font-weight: 500;
+    font-family: lineal;
+    color:black;
+    background-color:white;
+    border: 2px solid black;
+    box-shadow: 5px 5px;
+    padding: 4px;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+button:hover{
+    background-color: violet;
+    box-shadow: 10px 10px black;
+}
+
+/* TEXT STYLES */
+p{
+    font-size: 0.9rem;
+}
+h1{
+    font-size: 2rem;
+    font-weight: 800;
+}
+h2{
+    font-size:1.7rem;
+    font-weight: 500;
+}
+h3, li{
+    font-size: 1.3rem;
+    font-weight: 300;
+}
+strong{
+    font-weight: 900;
+}
+/* BLOCK CLASSES */
+.half-left{
+    display: block;
+    width: 45vw;
+}
+.third-single{
+    display: block;
+    margin-left: 45vw;
+    width: 22.5vw;
+}
+.two-thirds-left{
+    display: block;
+    width: 58.2vw;
+}
+.half-right{
+    display: block;
+    width: 45vw;
+    margin-left: 45vw;
+}
+.half-middle{
+    display: block;
+    width: 45vw;
+    margin-left: 22.5vw;
+}
+
+li{
+    margin-bottom: 15px;
+}
+
+ul{
+    padding: none !important;
+    list-style-type: square;
+}
+
+#ulLeft{
+    display: block;
+    width: 21vw;
+}
+#ulRight{
+    display: block;
+    width: 21vw;
+    margin-left: 3vw;
+}
+#listaGuidelines{
+    display: flex;
+    margin-left: 20vw;
+}
+
+/* SPACERS */
+.spacer50{
+    display: block;
+    height: 50vh;
+}
+.spacer10{
+    display: block;
+    height: 10vh;
+}
