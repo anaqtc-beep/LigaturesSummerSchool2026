@@ -1,11 +1,14 @@
 import * as THREE from "three";
 import { OrbitControls } from "jsm/controls/OrbitControls.js";
+import { STLLoader } from 'three/addons/loaders/STLLoader.js';
 
 // --- VARIÁVEIS GLOBAIS DE FÍSICA ---
 let physicsLib;
 let physicsWorld;
 let tmpTrans;
 let rigidBodies = [];
+let cubosDinamicos = [];
+let posicoesIniciais = []; // We will fill this dynamically
 
 // --- RENDERER ---
 const w = window.innerWidth;
@@ -31,6 +34,7 @@ camera.position.z = 5;
 
 // --- SCENE ---
 const scene = new THREE.Scene();
+const loader = new STLLoader();
 
 // --- LUZ ---
 const hemiLight = new THREE.HemisphereLight(0xFFFFFF, 0x444444, 1);
@@ -40,9 +44,7 @@ const sunLight = new THREE.DirectionalLight(0xFFFFFF, 3);
 sunLight.position.set(5, 5, 7.5);
 scene.add(sunLight);
 
-// --- OBJETOS VISUAIS (Modelos) ---
-const geo = new THREE.BoxGeometry(0.4, 0.8, 2.5);
-
+// --- OBJETOS VISUAIS CRUCIAL SETUP ---
 const screenHalfWidth = (frustumSize * aspect) / 2;
 const chaoLarguraVisual = (screenHalfWidth * 2) + 10; 
 
@@ -52,7 +54,6 @@ const mat = new THREE.MeshStandardMaterial({
     color: 0xFFFFFF,
     flatShading: true
 });
-
 const chao = new THREE.Mesh(chaoGeo, chaoMat);
 chao.position.set(0, -5.5, 0); 
 scene.add(chao);
@@ -82,38 +83,60 @@ scene.add(paredeTras);
 scene.add(paredeEsquerda);
 scene.add(paredeDireita);
 
-let cubosDinamicos = [];
-
-// Rotação inicial salva
+// Rotação inicial
 const rotacaoviz = new THREE.Quaternion();
 const eulerAnem = new THREE.Euler(5.5, 0, Math.PI / 3);
 rotacaoviz.setFromEuler(eulerAnem);
 
 const alturasY = [1.8, -1.8]; 
 
-alturasY.forEach(yPos => {
-    for (let i = 0; i < 7; i++) {
-        const meshCopy = new THREE.Mesh(geo, mat);
-        
-        const wireMat = new THREE.MeshBasicMaterial({ color: 0xff82f5, wireframe: true });
-        const wireMesh = new THREE.Mesh(geo, wireMat);
-        wireMesh.scale.setScalar(1.001);
-        meshCopy.add(wireMesh);
+// --- LOADING MANAGER LOGIC ---
+// We use a counter to make sure all 14 logos are loaded before starting physical operations
+let loadedCount = 0;
+const totalLogos = alturasY.length * 7; 
 
-        // Espaçamento seguro aumentado para 2.0 para garantir frestas perfeitas no início
-        meshCopy.position.set((i - 3) * 2.0, yPos, 0);
-        meshCopy.quaternion.copy(rotacaoviz);
+// --- CARREGAR APENAS UM LOGO CENTRALIZADO ---
+loader.load('LSS_3D_Logo.stl', function (geometry) {
+    
+    geometry.center(); 
 
-        scene.add(meshCopy);
-        cubosDinamicos.push(meshCopy); 
-    }
+    // 2. Calcula o tamanho real dele
+    geometry.computeBoundingBox();
+    const size = new THREE.Vector3();
+    geometry.boundingBox.getSize(size);
+    
+    const maxDim = Math.max(size.x, size.y, size.z);
+    const scaleFactor = 9 / maxDim;
+    geometry.scale(scaleFactor, scaleFactor, scaleFactor);
+
+    const meshCopy = new THREE.Mesh(geometry, mat);
+    
+    const wireMat = new THREE.MeshBasicMaterial({ color: 0xff82f5, wireframe: true });
+    const wireMesh = new THREE.Mesh(geometry, wireMat);
+    wireMesh.scale.setScalar(1.001);
+    meshCopy.add(wireMesh);
+
+    // Posiciona exatamente no centro do mundo (0, 0, 0)
+    meshCopy.position.set(0, 0, 0);
+    meshCopy.quaternion.copy(rotacaoviz);
+
+    //Adiciona à cena e às listas da física
+    scene.add(meshCopy);
+    cubosDinamicos.push(meshCopy); 
+
+    // Guarda a posição inicial estática
+    posicoesIniciais.push({
+        pos: meshCopy.position.clone(),
+        quat: meshCopy.quaternion.clone()
+    });
+
+    startAmmo();
+
+}, (xhr) => {
+    console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+}, (error) => {
+    console.error('Erro ao carregar o STL:', error);
 });
-
-// Guardamos a rotação e posição inicial original de cada cubo para mantê-los congelados
-const posicoesIniciais = cubosDinamicos.map(c => ({
-    pos: c.position.clone(),
-    quat: c.quaternion.clone()
-}));
 
 // --- AMMO SETUP ---
 function startAmmo() {
@@ -132,7 +155,7 @@ function startAmmo() {
         );
         physicsWorld.setGravity(new physicsLib.btVector3(0, 0, 0));
 
-        console.log("Ammo.js carregado com sucesso!");
+        console.log("Ammo.js carregado com sucesso com objetos sincronizados!");
 
         setupPhysicsObjects();
         animate();
@@ -141,7 +164,8 @@ function startAmmo() {
 
 function setupPhysicsObjects() {
     cubosDinamicos.forEach(cubo => {
-        const cuboTamanho = new physicsLib.btVector3(0.2, 0.4, 1.25);
+        // Adjust these bounding dimensions to match your STL scale if collision feels loose
+        const cuboTamanho = new physicsLib.btVector3(0.4, 0.4, 0.4); 
         createRigidBody(cubo, 1, cuboTamanho, true); 
     });
 
@@ -174,14 +198,13 @@ function createRigidBody(threeMesh, mass, size, startSleeping = false) {
     const rbInfo = new physicsLib.btRigidBodyConstructionInfo(mass, motionState, colShape, localInertia);
     const body = new physicsLib.btRigidBody(rbInfo);
 
-    const restitution = 0.8; 
-    body.setRestitution(restitution);
+    body.setRestitution(0.8);
     body.setFriction(0.2); 
     body.setDamping(0.0, 0.3); 
 
     if (startSleeping && mass > 0) {
         body.setActivationState(4); // ISLAND_SLEEPING
-        body.setSleepingThresholds(0.0, 0.0); // Impede que forças mínimas o acordem prematuramente
+        body.setSleepingThresholds(0.0, 0.0);
     }
 
     physicsWorld.addRigidBody(body);
@@ -209,10 +232,8 @@ function animate() {
     const textoTop = textoRect.top;
     const borda = window.innerHeight;
 
-    // SCROLL INTERAÇAO
     if (textoTop < borda && !gravityTriggered) {
         gravityTriggered = true; 
-        
         physicsWorld.setGravity(new physicsLib.btVector3(0, -9.81, 0));
         
         rigidBodies.forEach(obj => {
@@ -224,9 +245,7 @@ function animate() {
                 obj !== paredeTras
             ) {
                 const objAmmo = obj.userData.physicsBody;
-                
-                // Força a ativação completa limpando o estado congelado antigo
-                objAmmo.setActivationState(1); // 1 = ACTIVE_TAG
+                objAmmo.setActivationState(1); // ACTIVE_TAG
                 objAmmo.activate(true);
 
                 const randomAngularVelocityY = (Math.random() - 0.5) * 6.0; 
@@ -237,7 +256,6 @@ function animate() {
                     randomAngularVelocityY, 
                     0
                 );
-                
                 objAmmo.setAngularVelocity(velocityVector);
             }
         }); 
@@ -247,19 +265,18 @@ function animate() {
 function updatePhysics(deltaTime) {
     if (!physicsWorld || !tmpTrans) return;
 
-    // CORREÇÃO DEFINITIVA: Se o scroll não aconteceu, nós ignoramos a atualização da física nos cubos
-    // e resetamos as transformações para seus estados iniciais fixos.
     if (!gravityTriggered) {
         for (let i = 0; i < cubosDinamicos.length; i++) {
             const cubo = cubosDinamicos[i];
             const original = posicoesIniciais[i];
-            cubo.position.copy(original.pos);
-            cubo.quaternion.copy(original.quat);
+            if (original) {
+                cubo.position.copy(original.pos);
+                cubo.quaternion.copy(original.quat);
+            }
         }
-        return; // Sai da função sem rodar o simulador nos blocos dinâmicos
+        return; 
     }
 
-    // Só roda o simulador se a gravidade for disparada
     physicsWorld.stepSimulation(deltaTime, 10);
 
     for (let i = 0; i < rigidBodies.length; i++) {
@@ -277,5 +294,3 @@ function updatePhysics(deltaTime) {
         }
     }
 }
-
-startAmmo();
