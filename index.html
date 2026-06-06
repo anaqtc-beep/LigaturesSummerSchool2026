@@ -5,11 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="styles.css" rel="stylesheet"/>
     <title>Ligatures Summer School 2026</title>
-    <style>
-      body {
-        margin: 0;
-      }
-    </style>
     <script type="importmap">
       {
         "imports": {
@@ -21,63 +16,106 @@
     </script>
 
     <script src="./static/ammo.js"></script>
-    <script type="module" src="./index.js"></script>
+    <!-- <script type="module" src="./index.js"></script> -->
 
     <script src="https://cdn.jsdelivr.net/gh/kripken/ammo.js@HEAD/builds/ammo.wasm.js"></script>
     <!-- Sticky Button -->
-    <div id="menu">
-      <button>Open call</button>
-    </div>
-    <div id="scrollTeste">
-      <!-- Intro -->
-      <section>
-        <h2 class="half-left"> The Ligatures Special Interest Group invites you to Porto for the third edition of the <strong>Ligatures Summer School</strong>. Join us from <strong>July 15–17</strong>, 2026, for three days dedicated to exploring the intersection of traditional graphic heritage and emerging technological practices.
-        </h2>
-        <h3 class="third-single">
-          Hosted by the <strong>University of Porto </strong>in collaboration with partner institutions —IPCA and ESMAD—, the event is to be held every summer, on an annual basis and features a series of talks, workshops, and discussions exploring the intersection of <strong> writing, typography, design, and culture</strong> in historical, practical and speculative design applications.
-        </h3>
-        <div class="spacer50"></div>
-        <h3 class="two-thirds-left">
-          After a trial edition (2024) This year's Summer School is a <strong>three-day immersive program</strong> featuring a keynote speaker — Maurice Meilleur —, presentations from junior researchers (resulting from a call for participation) and roundtable discussions with the participation of senior researchers. <br>
-The program also includes two days dedicated to a hands-on workshops, preceding the main event, focused on exploring techniques of lettering and type design — led by the internationally awarded designer Julien Priez — and exploring techniques and approaches for integrating computational design into the practices of recovering, interpreting, and promoting cultural design heritage led by the senior lecturer and computational designer Maurice Meilleur.
-        </h3>
-        <p class="half-right">
-          This year's edition is being hosted by the Marques da Silva Foundation (FIMS) and the Faculty of Fine Arts of the University of Porto, and is possible through the generous support of the Luso-American Development Foundation (FLAD), the U.Porto cooperation Protocol - CGD, and the IOWA State Univeristy.
-        </p>
-      </section>
-      <!-- Presentations -->
-      <section>
-        <div class="spacer50"></div>
-        <h1 class="two-thirds-left">Presentations</h1>
-        <h2 class="two-thirds-left">Selected participants must structure their presentation in a 15-slide deck, auto-temporized, with 20 seconds each. Using images, graphics, text, videos, or animations. Each slide 20 seconds for a total of 5 minutes.</h2>
-        <h3 class="two-thirds-left">Make sure to convert your designs into images/outlines to avoid font compatibility issues. Consider using the following PowerPoint template (donwload the powerpoint file here). <br>
- Format: 15 slides, 20 seconds per slide (auto-timed) (max = 5-minute presentation) Goal: Fast-paced, visually rich presentations with strong narrative focus</h3>
-        <div class="spacer10"></div>
-        <h1 class="half-right">
-          Who should attend?
-        </h1>
-        <h3 class="half-right">
-          This call is mainly geared toward <strong>students and researchers in Graphic Design</strong>, but we also encourage proposals from fields such as  Literature and Book Studies, Digital Humanities, Artistic Practice and Research, Education and Computation , as long as they reflect on human-written, typed, or printed language forms and their implications within society and culture.
-        </h3>
-        <div class="spacer10"></div>
-        <h1 class="half-middle">
-          Design Guidelines
-        </h1>
-        <div id="listaGuidelines">
-          <ul id="ulLeft">
-            <li>Use large images, diagrams, process graphics, sketches, or visual notes — keep text to a minimum.</li>
-            <li>All text must be embedded in images (no system fonts!) to ensure compatibility across devices.</li>
-            <li>Use your own layout and design style, but prioritize legibility, contrast, and visual rhythm.</li>
-          </ul>
-          <ul id="ulRight">
-            <li>Provide the bibliographic/visual references and credits inside each slide (lower corner or integrated).</li>
-            <li>Slides may include the speaker notes/comments in the powerpoint file for a more efficient presentation delivery.</li>
-          </ul>
-        </div>
-    </section>
-    </div>
+    
   </head>
   <body>
+    <div id="hero">
+      <figure><img src="logos/LSS26_logo_cor.svg" alt="Ligatures_Summer_School_'26"></figure>
+    </div>
+    <button id="down"><img src="arrow_downward_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.svg" alt="down_arrow"></button>
+    <div class="spacerMini" id="target"></div>
+    <!-- <div id="menu">
+      <button>Open call</button>
+    </div> -->
+    <div id="scrollTeste">
+      <!-- Intro -->
+     <section id="intro" class="half-left">
+        <h1>Theme: Transitions <br>
+        <strong class="azulClaro">July 15–17, 2026</strong> </h1>
+        <h2>Faculty of Fine Arts, University of Porto (FBAUP), Portugal </h2>
+        <button>
+          <a href="https://ligatures.fba.up.pt/">https://ligatures.fba.up.pt/</a></button>
+        <div class="spacerMid"></div>
+        <h2> The Ligatures Special Interest Group invites you to Porto for the third edition of the <strong>Ligatures Summer School</strong>. Join us from <strong>July 15–17</strong>, 2026, for three days dedicated to exploring the intersection of traditional graphic heritage and emerging technological practices.
+        </h2>
+     </section>
+     <!--This years edition-->
+     <section class="half-right">
+        <div class="spacerMid"></div>
+        <h3>This year’s edition will feature:</h3>
+        <div id="listaGuidelines">
+        <ul>
+            <li><strong>Intensive Hands-On Workshops:</strong> Exploring topics that range from creative computation, post-digital letterpress, and contemporary typographic design.</li>
+            <li><strong>Post-Graduate Communications:</strong> A dedicated academic track for emerging research and speculative design. All text must be embedded in images (no system fonts!) to ensure compatibility across devices.</li>
+            <li><strong>International Keynotes:</strong>Insights from leading figures in reading research, legibility, and computational editorial design.</li>
+            
+          </ul>
+        </div>
+      </section>
+      <div class="spacerBig"></div>
+      <!-- Call for Communications -->
+       <!-- intro -->
+      <section>
+        <h1>Call for Communications</h1>
+        <h2><strong>Deadline:</strong> June 30, 2026 <br>
+        <strong>Notification of Acceptance:</strong> July 3, 2026</h2>
+      </section>
+      <div class="spacerMini"></div>
+      <!-- description -->
+       <section >
+        <h3 class="two-thirds-right">We invite researchers, designers, and students (graduate and post-graduate) to submit proposals for the Ligatures Summer School 2026 academic track, taking place on July 17, 2026. Research into how <strong>technological tools and traditional material practices inform visual communication, pedagogy, and design research</strong> are welcome. And especially how transitions between practices, culture and perceptions are occurring.</h3>
+        <div class="spacerMid"></div>
+        <h2 class="half-middle mobile-smaller-left azulEscuro"><strong>Transitions explores the cultural and technological <br>
+        realignments defining our era.</strong> </h2>
+        <h3 class="half-middle">As we navigate the accelerating<strong> shift from human-centric craftsmanship to AI-driven computational systems</strong>, the very mechanics of communication are transforming. Yet, this threshold is not an erasure—it is a vital space for the reconstruction and reinterpretation of our cultural legacies.</h3>
+        <h3 class="half-right">Tracing the continuous journey of reading and writing from their tangible, material roots to their complex, intellectual futures, Transitions aims to <strong>reflect on how we preserve, adapt, and reinvent our visual heritage.</strong> It is a platform to interrogate the shifting power dynamics of contemporary culture and to actively design the structural and typographic literacies of tomorrow.</h3>
+       </section>
+       <div class="spacerBig"></div>
+      <!-- rules and guides -->
+        <section>
+          <h2 class="two-thirds-left">We are accepting Extended Abstracts (including necessary visual documentation and images) for 5-minute, 15-slide presentations during the event. Authors are encouraged to submit proposals specific for this topic or in relevant topics within the Ligatures SIG mission.
+          </h2>
+          <h3 class="third-single mobile-smaller-right">Selected authors will be invited to expand their communications into  <strong>full papers for a peer-reviewed digital publication</strong> hosted on the U.Porto OJS platform (expected December 2026).</h3>
+        </section>
+        <div class="spacerMid"></div>
+        <section>
+          <h1 class="half-middle">Submission Categories
+          </h1>
+          <ul class="half-middle">
+            <li><strong>Literature Reviews:</strong> Critical mappings of historical or contemporary typographic and design landscapes.</li>
+            <li><strong>Research & Development Projects:</strong> Technical, pedagogical, or applied research bridging analog and digital workflows.</li>
+            <li><strong>Experimental & Speculative Design:</strong>Theoretical propositions or practical/visual modalities challenging the boundaries of letterforms and communication.</li>    
+            </ul>
+          <div class="spacerMini"></div>
+          <h1 class="half-right">Submission Guidelines
+          </h1>
+          <ul class=" half-right">
+            <li><strong>Format:</strong> Extended Abstract (Max. 1,000 words + up to 5 images/diagrams).</li>
+            <li><strong>Submission platform:</strong> All submissions must be handled via our Microsoft CMT platform:</li>   
+            <button>Opening Soon!</button>
+            </ul>
+            <div class="spacerMini"></div>
+            <p class="fourth-single mobile-smaller-right">The Microsoft CMT service was used for managing the peer-reviewing process for this conference. This service was provided for free by Microsoft and they bore all expenses, including costs for Azure cloud services as well as for software development and support.</p>
+        </section>
+      </div>
     <script type="module" src="index.js"></script>
   </body>
+  <footer>
+    <div><img src="logos/aTipo_black.svg" alt="aTipo_logo"></div>
+    <div><img src="logos/cgd-logo-black.svg" alt="caixaGeralDepositos_logo"></div>
+    <div><img src="logos/esad_logo_externo_horizontal-black.svg" alt="esad_logo"></div>
+    <div><img src="logos/esad—idea logo-black.svg" alt="esadIdea_logo"></div>
+    <div><img src="logos/esmad_black.svg" alt="esmad_logo"></div>
+    <div><img src="logos/fbaup_black.svg" alt="fbaup_logo"></div>
+    <div><img src="logos/fims_black.svg" alt="fims_logo"></div>
+    <div><img src="logos/FLAD-Logo-black.svg" alt="flad_logo"></div>
+    <div><img src="logos/i2ads_black.svg" alt="i2ads_logo"></div>
+    <div><img src="logos/ipca_black.svg" alt="ipca_logo"></div>
+    <div><img src="logos/Ligatures-Logo Horizontal New Full@4x.png" alt="ligatures_logo"></div>
+    <div><img src="logos/Logotype ID+ Horizontal BW.svg" alt="id+_logo"></div>
+  </footer>
 </html>

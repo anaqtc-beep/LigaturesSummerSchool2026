@@ -5,6 +5,14 @@
 *{
     box-sizing: border-box;
 }
+:root{
+    --azul:#42A4F4;
+    --rosa:#FF9EFC;
+    --azulEscuro: #06068C;
+    --rosaEscuro: #891086;
+}
+
+/* blocos estruturais */
 html{
     font-family: lineal;
 }
@@ -15,15 +23,97 @@ html{
     left: 0;
 }
 
+#hero{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+     justify-content: center;
+    align-items: center;
+}
+#hero figure{
+ width: 70%;
+ height: 70%;
+ display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0%;
+}
+
+#hero img{
+    width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+#down{
+    margin-top: -17vh;
+    margin-left: 92%;
+    display: flex;
+    justify-content: center;
+  align-items: center;
+  width: 4vw;
+  height: 4vw;
+  min-width: 40px;
+  min-height: 40px;
+}
+#down img{
+    width:2.5vw;
+    height: 2.5vw;
+    min-width: 25px;
+    min-height: 25px;
+}
+
 #scrollTeste{
     position: relative;
     display: block;
-    margin-top: 130vh;
+    margin-top: 20vh;
     width: 90vw;
-    margin-bottom: 100vh;
     margin-left:5vw;
     margin-right: 5vw;
 }
+
+footer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100vw;
+    gap: 24px;
+    background-color: var(--azul);
+    padding: 50px;
+    margin-top: 30vh;
+}
+
+footer div{
+    flex: 1 1 calc(16.66% - 24px);
+    min-width: 120px;
+    max-width: 180px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+footer div img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  max-height: 50px; 
+}
+
+/* Setup canvas */
+body {
+    margin: 0;
+    overflow-x: hidden;
+  }
+
+  canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none; 
+  }
 
 /* BOTAO */
 #menu{
@@ -44,14 +134,18 @@ button{
     color:black;
     background-color:white;
     border: 2px solid black;
-    box-shadow: 5px 5px;
+    box-shadow: 5px 5px var(--rosaEscuro);
     padding: 4px;
     padding-left: 8px;
     padding-right: 8px;
 }
 button:hover{
-    background-color: violet;
-    box-shadow: 10px 10px black;
+    background-color: var(--rosa);
+    box-shadow: 10px 10px var(--rosaEscuro);
+}
+
+button:hover a{
+    font-style: italic;
 }
 
 /* TEXT STYLES */
@@ -73,6 +167,8 @@ h3, li{
 strong{
     font-weight: 900;
 }
+
+
 /* BLOCK CLASSES */
 .half-left{
     display: block;
@@ -87,6 +183,11 @@ strong{
     display: block;
     width: 58.2vw;
 }
+.two-thirds-right{
+    display: block;
+    width: 58.2vw;
+    margin-left: 22.5vw;
+}
 .half-right{
     display: block;
     width: 45vw;
@@ -97,9 +198,20 @@ strong{
     width: 45vw;
     margin-left: 22.5vw;
 }
+.second-single{
+     display: block;
+    margin-left: 22.5vw;
+    width: 22.5vw;
+}
+.fourth-single{
+    display: block;
+    margin-left: 67vw;
+    width: 22.5vw;
+}
 
 li{
     margin-bottom: 15px;
+    margin-left: -6%;
 }
 
 ul{
@@ -116,17 +228,101 @@ ul{
     width: 21vw;
     margin-left: 3vw;
 }
-#listaGuidelines{
-    display: flex;
-    margin-left: 20vw;
+
+a{
+text-decoration: none;
+color: black;
+}
+
+/* texto colorido */
+.azulClaro{
+    color:var(--azul)
+}
+.rosa{
+    color: var(--rosa);
+}
+.azulEscuro{
+    color: var(--azulEscuro);
+}
+
+/* casos especiais */
+#intro h2{
+    margin-bottom: 10pt;
 }
 
 /* SPACERS */
-.spacer50{
+.spacerBig{
     display: block;
-    height: 50vh;
+    height: 35vh;
 }
-.spacer10{
+.spacerMid{
     display: block;
     height: 10vh;
+}
+.spacerMini{
+    display: block;
+    height: 3vh;
+}
+
+
+/* Mobile Version */
+@media (max-width:700px){
+    .half-left{
+    display: block;
+    width: 90vw;
+}
+.third-single{
+   display: block;
+    width: 90vw;
+    margin: 0;
+}
+.two-thirds-left{
+    display: block;
+    width: 90vw;
+}
+.two-thirds-right{
+    display: block;
+    width: 90vw;
+    margin-left: 0vw;
+}
+.half-right{
+    display: block;
+    width: 90vw;
+    margin-left: 0vw;
+}
+.half-middle{
+    display: block;
+    width: 90vw;
+    margin-left: 0vw;
+}
+.second-single{
+    display: block;
+    width: 90vw;
+    margin-left: 0vw;
+}
+.fourth-single{
+    display: block;
+    width: 90vw;
+    margin-left: 0vw;
+}
+.mobile-smaller-left{
+    display: block;
+    width: 70vw !important;
+    margin-left: 0vw;
+}
+.mobile-smaller-right{
+    display: block;
+    width: 70vw !important;
+    margin-left: 20vw !important;
+}
+button{
+    background-color: var(--rosa);
+}
+#down{
+    margin-left: 85%;
+    margin-top: -10vh;
+}
+#hero figure{
+    width:95%;
+}
 }
