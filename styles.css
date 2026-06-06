@@ -6,10 +6,10 @@
     box-sizing: border-box;
 }
 :root{
-    --azul:#42A4F4;
-    --rosa:#FF9EFC;
-    --azulEscuro: #06068C;
-    --rosaEscuro: #891086;
+    --azul:#977CBF;
+    --rosa:#F7CAE0;
+    --azulEscuro: #08058F;
+    --rosaEscuro: #E35197;
 }
 
 /* blocos estruturais */
@@ -80,7 +80,7 @@ footer{
     position: relative;
     width: 100vw;
     gap: 24px;
-    background-color: var(--azul);
+    background-color: var(--rosaEscuro);
     padding: 50px;
     margin-top: 30vh;
 }
@@ -134,14 +134,14 @@ button{
     color:black;
     background-color:white;
     border: 2px solid black;
-    box-shadow: 5px 5px var(--rosaEscuro);
+    box-shadow: 5px 5px var(--azul);
     padding: 4px;
     padding-left: 8px;
     padding-right: 8px;
 }
 button:hover{
     background-color: var(--rosa);
-    box-shadow: 10px 10px var(--rosaEscuro);
+    box-shadow: 10px 10px var(--azul);
 }
 
 button:hover a{
@@ -236,7 +236,7 @@ color: black;
 
 /* texto colorido */
 .azulClaro{
-    color:var(--azul)
+    color:var(--rosaEscuro)
 }
 .rosa{
     color: var(--rosa);
