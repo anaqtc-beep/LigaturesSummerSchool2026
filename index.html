@@ -1,121 +1,412 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="styles.css" rel="stylesheet"/>
-    <title>Ligatures Summer School 2026</title>
-    <script type="importmap">
-      {
-        "imports": {
-          "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
-          "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/",
-          "jsm/": "https://unpkg.com/three@0.160.0/examples/jsm/"
-        }
-      }
-    </script>
+<head>
+  <!-- ===== Document basics ===== -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <script src="./static/ammo.js"></script>
-    <!-- <script type="module" src="./index.js"></script> -->
+  <!-- No-flash theme: apply the saved choice before paint; otherwise OS preference is used.
+       (Sets data-theme only; never injects page content.) -->
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("ligatures-theme");
+        if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    })();
+  </script>
 
-    <script src="https://cdn.jsdelivr.net/gh/kripken/ammo.js@HEAD/builds/ammo.wasm.js"></script>
-    <!-- Sticky Button -->
-    
-  </head>
-  <body>
-    <div id="hero">
-      <figure><img src="logos/LSS_logo_color.svg" alt="Ligatures_Summer_School_'26"></figure>
-    </div>
-    <button id="down"><img src="arrow_downward_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.svg" alt="down_arrow"></button>
-    <div class="spacerMini" id="target"></div>
-    <!-- <div id="menu">
-      <button>Open call</button>
-    </div> -->
-    <div id="scrollTeste">
-      <!-- Intro -->
-     <section id="intro" class="half-left">
-        <h1>Theme: Transitions <br>
-        <strong class="azulClaro">July 15–17, 2026</strong> </h1>
-        <h2>Faculty of Fine Arts, University of Porto (FBAUP), Portugal </h2>
-        <button>
-          <a href="https://ligatures.fba.up.pt/">https://ligatures.fba.up.pt/</a></button>
-        <div class="spacerMid"></div>
-        <h2> The Ligatures Special Interest Group invites you to Porto for the third edition of the <strong>Ligatures Summer School</strong>. Join us from <strong>July 15–17</strong>, 2026, for three days dedicated to exploring the intersection of traditional graphic heritage and emerging technological practices.
-        </h2>
-     </section>
-     <!--This years edition-->
-     <section class="half-right">
-        <div class="spacerMid"></div>
-        <h3>This year’s edition will feature:</h3>
-        <div id="listaGuidelines">
-        <ul>
-            <li><strong>Intensive Hands-On Workshops:</strong> Exploring topics that range from creative computation, post-digital letterpress, and contemporary typographic design.</li>
-            <li><strong>Post-Graduate Communications:</strong> A dedicated academic track for emerging research and speculative design. All text must be embedded in images (no system fonts!) to ensure compatibility across devices.</li>
-            <li><strong>International Keynotes:</strong>Insights from leading figures in reading research, legibility, and computational editorial design.</li>
-            
+  <!-- ===== SEO / descriptive metadata ===== -->
+  <title>Ligatures Summer School 2026 — Transitions</title>
+  <meta name="description" content="Ligatures Summer School 2026 · Transitions — July 15–17, Faculty of Fine Arts, University of Porto (FBAUP). Read the Call for Communications: deadline 30 June 2026.">
+  <meta name="keywords" content="Ligatures, Ligatures Summer School, Transitions, typography, type design, computational design, post-digital letterpress, materialities of language, visual communication, written and typographic artifacts, FBAUP, Porto, i2ADS, ID+, call for communications, design research">
+
+  <!-- ===== Authorship, credits & dates ===== -->
+  <!-- Authors = student design team; rights/credits = Pedro Amado / FBAUP / i2ADS / Ligatures SIG -->
+  <meta name="author" content="Ana Coelho, João Barbosa, Sofia Laranjo — students of the Web Design course, BA in Communication Design (LDC), FBAUP">
+  <meta name="copyright" content="© 2026 Ligatures SIG — FBAUP / i2ADS. Coordination: Pedro Amado.">
+  <meta name="dcterms.creator" content="Ligatures SIG — Pedro Amado, FBAUP / i2ADS">
+  <meta name="dcterms.created" content="2026-06-08">
+  <meta name="dcterms.modified" content="2026-06-08">
+  <meta name="date" content="2026-06-08">
+  <meta name="robots" content="index, follow">
+  <!-- TODO: confirm final deploy path; defaulting to /2026/ to mirror the 2025 edition (/2025/). -->
+  <link rel="canonical" href="https://ligatures.fba.up.pt/2026/">
+
+  <!-- ===== Theme colour per scheme ===== -->
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#100e16" media="(prefers-color-scheme: dark)">
+
+  <!-- ===== Open Graph (social sharing) ===== -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Ligatures Summer School 2026">
+  <meta property="og:title" content="Ligatures Summer School 2026 — Transitions">
+  <meta property="og:description" content="Save the date: July 15–17, 2026, at FBAUP, Porto. Call for Communications open — deadline 30 June 2026.">
+  <meta property="og:url" content="https://ligatures.fba.up.pt/2026/">
+  <meta property="og:image" content="https://ligatures.fba.up.pt/2026/assets/img/og-image.png">
+  <meta property="og:image:alt" content="Ligatures Summer School 2026 — Transitions">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:updated_time" content="2026-06-08">
+
+  <!-- ===== Twitter card ===== -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Ligatures Summer School 2026 — Transitions">
+  <meta name="twitter:description" content="Save the date: July 15–17, 2026, at FBAUP, Porto. Call for Communications — deadline 30 June 2026.">
+  <meta name="twitter:image" content="https://ligatures.fba.up.pt/2026/assets/img/og-image.png">
+
+  <!-- ===== Icons ===== -->
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/img/icon-512.png" sizes="512x512" type="image/png">
+  <link rel="apple-touch-icon" href="assets/img/icon-512.png">
+
+  <!-- ===== Fonts & styles ===== -->
+  <link rel="preload" href="assets/fonts/LinealVF.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+  <!-- Accessibility: skip straight to main content -->
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <!-- Future WebGL mount point: a #scene <canvas> will be inserted here by Three.js
+       (letters from the feature logo become physics blocks that fall and collide
+       with the body text). Inert for now — the feature shows the static logo. -->
+
+  <!-- ===== Top colour stripe (Ana's palette) ===== -->
+  <div class="topbar" aria-hidden="true"></div>
+
+  <!-- ===== Sticky header: logotype + primary nav + theme toggle ===== -->
+  <header class="site-header">
+    <nav class="wrap nav" aria-label="Primary">
+      <a class="brand" href="#top" aria-label="Ligatures — home">
+        <img class="logo-light" src="assets/img/ligatures-logo.svg" alt="Ligatures" width="150" height="27">
+        <img class="logo-dark" src="assets/img/ligatures-logo-white.svg" alt="" aria-hidden="true" width="150" height="27">
+      </a>
+
+      <div class="nav-controls">
+        <ul class="nav-menu" id="nav-menu">
+          <li><a href="#overview">Overview</a></li>
+          <li><a href="#theme">Theme</a></li>
+          <li><a href="#call">Call</a></li>
+          <li><a href="#dates">Dates</a></li>
+          <li><a href="#submit">Submit</a></li>
+          <li><a href="#committee">Committee</a></li>
+        </ul>
+
+        <!-- Discreet light/dark toggle (overrides OS pref, persists in localStorage) -->
+        <button class="theme-toggle" type="button" aria-label="Switch to dark theme" title="Switch to dark theme">
+          <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" focusable="false">
+            <circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.5"></circle>
+            <path d="M8 1 A7 7 0 0 1 8 15 Z" fill="currentColor"></path>
+          </svg>
+        </button>
+
+        <!-- Mobile menu button -->
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu">Menu</button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- ============================================================
+         FEATURE (#top) — full-viewport hero with Ana's colour LSS logo.
+         Placeholder for the future Three.js interactive object.
+         ============================================================ -->
+    <section class="feature" id="top">
+      <div class="feature__logo">
+        <img src="assets/img/lss-logo-color.svg" alt="Ligatures Summer School 2026 — Transitions" width="760" height="430">
+      </div>
+      <!-- Scroll cue → first content section -->
+      <a class="feature__down" href="#overview" aria-label="Scroll to content">
+        <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" focusable="false">
+          <path d="M12 4v14m0 0l-6-6m6 6l6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </a>
+    </section>
+
+    <!-- ============================================================
+         OVERVIEW (#overview) — "Theme: Transitions" demoted to eyebrow;
+         dates, location, URL and the call made prominent.
+         ============================================================ -->
+    <section class="wrap section" id="overview">
+      <div class="section__head">
+        <p class="eyebrow" data-index="01">Theme · Transitions</p>
+        <h1>Ligatures Summer School 2026</h1>
+      </div>
+
+      <!-- Prominent key facts: dates · location · URL -->
+      <dl class="facts">
+        <dt>July 15–17, 2026</dt>
+        <dd>Faculty of Fine Arts, University of Porto (FBAUP) — Porto, Portugal</dd>
+        <dd class="url"><a href="https://ligatures.fba.up.pt/">https://ligatures.fba.up.pt/</a></dd>
+      </dl>
+
+      <!-- Primary calls to action (accessible links styled as Ana's sticker buttons) -->
+      <div class="actions">
+        <a class="btn btn--magenta" href="#call">Read the Call</a>
+        <a class="btn" href="#dates">Key dates</a>
+      </div>
+
+      <!-- Intro (mission-forward, Version C) on the left; the edition list offset right -->
+      <div class="editorial-flow" style="margin-top: var(--space-xl);">
+        <p class="lead off-0 w-twothirds">The Ligatures Special Interest Group invites you to Porto for the third edition of the Ligatures Summer School. Join us from July 15–17, 2026, for three days on the materialities of language — where graphic heritage, visual communication and emerging technologies reshape written and typographic artifacts.</p>
+
+        <!-- "This year's edition will feature" — placed right (Ana's half-right) -->
+        <dl class="feature-list off-half w-half">
+          <div>
+            <dt>Intensive hands-on workshops</dt>
+            <dd>Exploring topics that range from creative computation and post-digital letterpress to contemporary typographic design.</dd>
+          </div>
+          <div>
+            <dt>Post-graduate communications</dt>
+            <dd>A dedicated academic track for emerging research and speculative design.</dd>
+          </div>
+          <div>
+            <dt>International keynotes</dt>
+            <dd>Insights from leading figures in reading research, legibility, and computational editorial design.</dd>
+          </div>
+        </dl>
+
+        <p class="muted off-0 w-twothirds">Speaker announcements, registration and the full programme are coming soon.</p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         THEME (#theme) — the "Transitions" concept (two-paragraph
+         statement), set as a large display word + offset columns.
+         ============================================================ -->
+    <section class="wrap section" id="theme">
+      <div class="section__head">
+        <p class="eyebrow" data-index="02">The theme</p>
+        <p class="display" style="color: var(--accent);">Transitions</p>
+      </div>
+      <!-- Two-paragraph statement in offset columns (left, then offset 1/3) -->
+      <div class="editorial-flow">
+        <p class="off-0 w-twothirds">Transitions explores the cultural and technological realignments defining our era. As we navigate the accelerating shift from human-centric craftsmanship to AI-driven computational systems, the very mechanics of communication are transforming. Yet this threshold is not an erasure — it is a vital space for the reconstruction and reinterpretation of our cultural legacies.</p>
+        <p class="off-third w-twothirds">Tracing the continuous journey of reading and writing from their tangible, material roots to their complex, intellectual futures, Transitions reflects on how we preserve, adapt, and reinvent our visual heritage. It is a platform to interrogate the shifting power dynamics of contemporary culture and to actively design the structural and typographic literacies of tomorrow.</p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CALL FOR COMMUNICATIONS (#call) — intro, scope, format,
+         key-date chips and the three submission categories.
+         ============================================================ -->
+    <section class="wrap section" id="call">
+      <div class="section__head">
+        <p class="eyebrow" data-index="03">Call for communications</p>
+        <h2>Call for Communications</h2>
+      </div>
+
+      <!-- Embedded 4-column rhythm: lead (1/4 in) → big quote → offset paragraphs -->
+      <div class="editorial-flow">
+        <p class="lead off-quarter w-threeq">We invite researchers, designers, and students (graduate and post-graduate) to submit proposals for the Ligatures Summer School 2026 academic track, taking place on July 17, 2026.</p>
+
+        <blockquote class="pullquote off-0 w-full">Transitions explores the cultural and technological realignments defining our era.</blockquote>
+
+        <p class="off-quarter w-twothirds">Research into how technological tools and traditional material practices inform visual communication, pedagogy, and design research is welcome — and especially how transitions between practices, culture and perceptions are occurring.</p>
+
+        <p class="off-half w-half">Selected authors will be invited to expand their communications into full papers for a peer-reviewed digital publication hosted on the U.Porto OJS platform (expected December 2026).</p>
+
+        <p class="accepting off-0 w-twothirds">We are accepting Extended Abstracts (including necessary visual documentation and images) for 5-minute, 15-slide presentations during the event. Authors are encouraged to submit proposals specific to this topic, or on relevant topics within the Ligatures SIG mission.</p>
+      </div>
+
+      <!-- Submission categories -->
+      <h3 style="margin-top: var(--space-2xl);">Submission categories</h3>
+      <div class="cards">
+        <article class="card">
+          <span class="card__index">01</span>
+          <h3>Literature Reviews</h3>
+          <p>Critical mappings of historical or contemporary typographic and design landscapes.</p>
+        </article>
+        <article class="card">
+          <span class="card__index">02</span>
+          <h3>Research &amp; Development Projects</h3>
+          <p>Technical, pedagogical, or applied research bridging analog and digital workflows.</p>
+        </article>
+        <article class="card">
+          <span class="card__index">03</span>
+          <h3>Experimental &amp; Speculative Design</h3>
+          <p>Theoretical propositions or practical and visual modalities challenging the boundaries of letterforms and communication.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         KEY DATES (#dates) — full timeline; key milestones accented.
+         ============================================================ -->
+    <section class="wrap section" id="dates">
+      <div class="section__head">
+        <p class="eyebrow" data-index="04">Key dates</p>
+        <h2>Key dates &amp; deadlines</h2>
+      </div>
+      <dl class="dates">
+        <div class="date-row date-row--key">
+          <dt>30 June 2026</dt>
+          <dd>Call for Communications closes — extended-abstract submission deadline.</dd>
+        </div>
+        <div class="date-row">
+          <dt>3 July 2026</dt>
+          <dd>Notification of acceptance to authors.</dd>
+        </div>
+        <div class="date-row date-row--key">
+          <dt>15–17 July 2026</dt>
+          <dd>Ligatures Summer School at FBAUP, Porto. Academic track: 17 July 2026.</dd>
+        </div>
+        <div class="date-row">
+          <dt>15 Sept 2026</dt>
+          <dd>Invitations to selected authors to expand abstracts into full papers.</dd>
+        </div>
+        <div class="date-row">
+          <dt>31 Oct 2026</dt>
+          <dd>Full-article submission deadline — begins double-blind peer review.</dd>
+        </div>
+        <div class="date-row">
+          <dt>December 2026</dt>
+          <dd>Peer-reviewed digital publication launches on the U.Porto OJS platform.</dd>
+        </div>
+      </dl>
+    </section>
+
+    <!-- ============================================================
+         SUBMIT (#submit) — author & submission guidelines, the live
+         CMT submission link, and the mandatory CMT acknowledgment.
+         ============================================================ -->
+    <section class="wrap section" id="submit">
+      <div class="section__head">
+        <p class="eyebrow" data-index="05">Submissions</p>
+        <h2>Author &amp; submission guidelines</h2>
+      </div>
+
+      <div class="editorial">
+        <div class="pos-left-half">
+          <h3>What to submit</h3>
+          <ul class="checklist">
+            <li>Format: Extended Abstract — maximum 1,000 words, plus up to 5 images or diagrams.</li>
+            <li>Include the necessary visual documentation and images to support your proposal.</li>
+            <li>Accepted proposals are presented as a 5-minute, 15-slide presentation on 17 July 2026.</li>
+            <li>Submit under one of three categories: Literature Reviews; Research &amp; Development Projects; or Experimental &amp; Speculative Design.</li>
+            <li>Selected authors are invited to expand their abstracts into full papers for a peer-reviewed digital publication on the U.Porto OJS platform (expected December 2026).</li>
           </ul>
         </div>
-      </section>
-      <div class="spacerBig"></div>
-      <!-- Call for Communications -->
-       <!-- intro -->
-      <section>
-        <h1>Call for Communications</h1>
-        <h2><strong>Deadline:</strong> June 30, 2026 <br>
-        <strong>Notification of Acceptance:</strong> July 3, 2026</h2>
-      </section>
-      <div class="spacerMini"></div>
-      <!-- description -->
-       <section >
-        <h3 class="two-thirds-right">We invite researchers, designers, and students (graduate and post-graduate) to submit proposals for the Ligatures Summer School 2026 academic track, taking place on July 17, 2026. Research into how <strong>technological tools and traditional material practices inform visual communication, pedagogy, and design research</strong> are welcome. And especially how transitions between practices, culture and perceptions are occurring.</h3>
-        <div class="spacerMid"></div>
-        <h2 class="half-middle mobile-smaller-left azulEscuro"><strong>Transitions explores the cultural and technological <br>
-        realignments defining our era.</strong> </h2>
-        <h3 class="half-middle">As we navigate the accelerating<strong> shift from human-centric craftsmanship to AI-driven computational systems</strong>, the very mechanics of communication are transforming. Yet, this threshold is not an erasure—it is a vital space for the reconstruction and reinterpretation of our cultural legacies.</h3>
-        <h3 class="half-right">Tracing the continuous journey of reading and writing from their tangible, material roots to their complex, intellectual futures, Transitions aims to <strong>reflect on how we preserve, adapt, and reinvent our visual heritage.</strong> It is a platform to interrogate the shifting power dynamics of contemporary culture and to actively design the structural and typographic literacies of tomorrow.</h3>
-       </section>
-       <div class="spacerBig"></div>
-      <!-- rules and guides -->
-        <section>
-          <h2 class="two-thirds-left">We are accepting Extended Abstracts (including necessary visual documentation and images) for 5-minute, 15-slide presentations during the event. Authors are encouraged to submit proposals specific for this topic or in relevant topics within the Ligatures SIG mission.
-          </h2>
-          <h3 class="third-single mobile-smaller-right">Selected authors will be invited to expand their communications into  <strong>full papers for a peer-reviewed digital publication</strong> hosted on the U.Porto OJS platform (expected December 2026).</h3>
-        </section>
-        <div class="spacerMid"></div>
-        <section>
-          <h1 class="half-middle">Submission Categories
-          </h1>
-          <ul class="half-middle">
-            <li><strong>Literature Reviews:</strong> Critical mappings of historical or contemporary typographic and design landscapes.</li>
-            <li><strong>Research & Development Projects:</strong> Technical, pedagogical, or applied research bridging analog and digital workflows.</li>
-            <li><strong>Experimental & Speculative Design:</strong>Theoretical propositions or practical/visual modalities challenging the boundaries of letterforms and communication.</li>    
-            </ul>
-          <div class="spacerMini"></div>
-          <h1 class="half-right">Submission Guidelines
-          </h1>
-          <ul class=" half-right">
-            <li><strong>Format:</strong> Extended Abstract (Max. 1,000 words + up to 5 images/diagrams).</li>
-            <li><strong>Submission platform:</strong> All submissions must be handled via our Microsoft CMT platform:</li>   
-            <button>Opening Soon!</button>
-            </ul>
-            <div class="spacerMini"></div>
-            <p class="fourth-single mobile-smaller-right">The Microsoft CMT service was used for managing the peer-reviewing process for this conference. This service was provided for free by Microsoft and they bore all expenses, including costs for Azure cloud services as well as for software development and support.</p>
-        </section>
+
+        <div class="pos-right-half">
+          <h3>Where &amp; how to submit</h3>
+          <ol class="steps">
+            <li>All submissions are handled through our Microsoft CMT (Conference Management Toolkit) platform.</li>
+            <li>Create a CMT account or sign in, then open the Ligatures Summer School 2026 submission form.</li>
+            <li>Upload your extended abstract (max. 1,000 words) with up to 5 images or diagrams, and complete the required metadata.</li>
+            <li>Submit before the deadline — 30 June 2026. You will be notified of the outcome by 3 July 2026.</li>
+          </ol>
+
+          <!-- Live CMT submission link (accessible <a>, opens in a new tab) -->
+          <div class="actions">
+            <a class="btn btn--magenta" href="https://cmt3.research.microsoft.com/LIGA2026/" target="_blank" rel="noopener">Submit via Microsoft CMT ↗</a>
+          </div>
+
+          <!-- MANDATORY CMT acknowledgment: static, plain, unmodified text, placed
+               immediately after the submission link. Do not bold/italic/comment out. -->
+          <p class="cmt-ack cmt-ack--standalone">The Microsoft CMT service was used for managing the peer-reviewing process for this conference. This service was provided for free by Microsoft and they bore all expenses, including costs for Azure cloud services as well as for software development and support.</p>
+        </div>
       </div>
-    <script type="module" src="index.js"></script>
-  </body>
-  <footer>
-    <div><img src="logos/aTipo_black.svg" alt="aTipo_logo"></div>
-    <div><img src="logos/cgd-logo-black.svg" alt="caixaGeralDepositos_logo"></div>
-    <div><img src="logos/esad_logo_externo_horizontal-black.svg" alt="esad_logo"></div>
-    <div><img src="logos/esad—idea logo-black.svg" alt="esadIdea_logo"></div>
-    <div><img src="logos/esmad_black.svg" alt="esmad_logo"></div>
-    <div><img src="logos/fbaup_black.svg" alt="fbaup_logo"></div>
-    <div><img src="logos/fims_black.svg" alt="fims_logo"></div>
-    <div><img src="logos/FLAD-Logo-black.svg" alt="flad_logo"></div>
-    <div><img src="logos/i2ads_black.svg" alt="i2ads_logo"></div>
-    <div><img src="logos/ipca_black.svg" alt="ipca_logo"></div>
-    <div><img src="logos/Ligatures-Logo Horizontal New Full@4x.png" alt="ligatures_logo"></div>
-    <div><img src="logos/Logotype ID+ Horizontal BW.svg" alt="id+_logo"></div>
+    </section>
+
+    <!-- ============================================================
+         COMMITTEE (#committee) — organising, design & scientific boards.
+         ============================================================ -->
+    <section class="wrap section" id="committee">
+      <div class="section__head">
+        <p class="eyebrow" data-index="06">Organisation</p>
+        <h2>Committee</h2>
+      </div>
+
+      <div class="committee-group">
+        <h3>Organizing Committee</h3>
+        <ul class="people people--wide">
+          <li><span class="name">Pedro Amado</span> <span class="aff">FBAUP / i2ADS</span> <span class="role">Coordination</span></li>
+          <li><span class="name">Vítor Quelhas</span> <span class="aff">IPP-ESMAD / ID+</span></li>
+          <li><span class="name">Ana Catarina Silva</span> <span class="aff">IPCA-ESD / ID+</span></li>
+          <li><span class="name">Fabrício Fava</span> <span class="aff">FBAUP / i2ADS</span></li>
+          <li><span class="name">Cristina Ferreira</span> <span class="aff">FBAUP / i2ADS</span></li>
+          <li><span class="name">Graciela Machado</span> <span class="aff">FBAUP / i2ADS</span></li>
+          <li><span class="name">Rúben Dias</span> <span class="aff">ESAD / esad—idea</span></li>
+          <li><span class="name">Olinda Martins</span> <span class="aff">UA / ID+</span></li>
+        </ul>
+      </div>
+
+      <div class="committee-group">
+        <h3>Design &amp; Communication</h3>
+        <ul class="people">
+          <li><span class="name">Ana Coelho</span> <span class="aff">FBAUP / LDC</span></li>
+          <li><span class="name">João Barbosa</span> <span class="aff">FBAUP / LDC</span></li>
+          <li><span class="name">Sofia Laranjo</span> <span class="aff">FBAUP / LDC</span></li>
+        </ul>
+      </div>
+
+      <div class="committee-group">
+        <h3>Scientific &amp; Editorial Board</h3>
+        <ul class="people people--wide">
+          <li><span class="name">Pedro Amado</span> <span class="aff">FBAUP / i2ADS</span> <span class="role">Chair</span></li>
+          <li><span class="name">Vítor Quelhas</span> <span class="aff">IPP-ESMAD / ID+</span></li>
+          <li><span class="name">Ana Catarina Silva</span> <span class="aff">IPCA-ESD / ID+</span></li>
+          <li><span class="name">Fabrício Fava</span> <span class="aff">FBAUP / i2ADS</span></li>
+          <li><span class="name">Cristina Ferreira</span> <span class="aff">FBAUP / i2ADS</span></li>
+          <li><span class="name">Rúben Dias</span> <span class="aff">ESAD / esad—idea</span></li>
+          <li><span class="name aff">Additional members to be announced.</span></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================================================
+       FOOTER — temp-site structure (partner logos order/count, brand,
+       CMT acknowledgment, credits) in Ana's palette: deep-blue band.
+       ============================================================ -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <!-- Partner institutions & support (white logos, temp-site order) -->
+      <section class="partners" aria-label="Partner institutions and support">
+        <h2>Partner institutions &amp; support</h2>
+        <ul class="partner-logos">
+          <li><img src="assets/logos/fbaup-white.svg" alt="Faculty of Fine Arts, University of Porto (FBAUP)"></li>
+          <li><img src="assets/logos/i2ads-white.svg" alt="i2ADS — Research Institute in Art, Design and Society"></li>
+          <li><img src="assets/logos/idplus-white.svg" alt="ID+ Research Institute for Design, Media and Culture"></li>
+          <li><img src="assets/logos/esmad-white.svg" alt="ESMAD — Polytechnic of Porto"></li>
+          <li><img src="assets/logos/ipca-white.svg" alt="ESD — Polytechnic Institute of Cávado and Ave (IPCA)"></li>
+          <li><img src="assets/logos/esad-white.svg" alt="ESAD — School of Arts and Design, Matosinhos"></li>
+          <li><img src="assets/logos/esad-idea-white.svg" alt="esad—idea — Research in Design and Art"></li>
+          <li><img src="assets/logos/atipo-white.svg" alt="Atipo"></li>
+          <li><img src="assets/logos/fct-white.svg" alt="Fundação para a Ciência e a Tecnologia (FCT)"></li>
+        </ul>
+      </section>
+
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="assets/img/ligatures-logo-white.svg" alt="Ligatures" width="170" height="30">
+          <a class="footer-url" href="https://ligatures.fba.up.pt/">https://ligatures.fba.up.pt/</a>
+          <p class="footer-note" style="margin-top: var(--space-s);">Ligatures Summer School 2026 — “Transitions”. A Ligatures SIG initiative hosted at the Faculty of Fine Arts, University of Porto (FBAUP), Portugal.</p>
+        </div>
+        <div class="footer-meta">
+          <p class="footer-note">Peer-review for the academic track is managed via Microsoft CMT. The peer-reviewed publication is hosted on the U.Porto OJS platform.</p>
+          <!-- MANDATORY CMT acknowledgment (footer copy): static, plain, unmodified text. -->
+          <p class="cmt-ack">The Microsoft CMT service was used for managing the peer-reviewing process for this conference. This service was provided for free by Microsoft and they bore all expenses, including costs for Azure cloud services as well as for software development and support.</p>
+        </div>
+      </div>
+
+      <!-- Credits: rights holder, student authors, and typeface attribution -->
+      <div class="footer-credits">
+        <span>© 2026 Ligatures SIG — Faculty of Fine Arts, University of Porto (FBAUP).</span>
+        <span>Organised by Pedro Amado · FBAUP / i2ADS, for the Ligatures Special Interest Group.</span>
+        <span>Web design: Ana Coelho, João Barbosa &amp; Sofia Laranjo — students of the Web Design course, BA in Communication Design (LDC), FBAUP.</span>
+        <span>Typeface: Lineal by Frank Adebiaye, with Anton Moglia &amp; Ariel Martín Pérez — distributed by <a href="https://velvetyne.fr/fonts/lineal/" target="_blank" rel="noopener">Velvetyne</a>.</span>
+        <span><a href="#top">Back to top ↑</a></span>
+      </div>
+    </div>
   </footer>
+
+  <!-- Floating back-to-top (revealed after scroll) -->
+  <a class="to-top" href="#top" aria-label="Back to top">↑</a>
+
+  <script src="assets/js/app.js" defer></script>
+</body>
 </html>
